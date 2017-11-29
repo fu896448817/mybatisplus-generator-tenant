@@ -1,0 +1,103 @@
+package ${package.Controller};
+
+import com.yjl.common.ResponseEntity;
+import ${package.Entity}.${entity}Entity;
+import ${package.Service}.${table.serviceName};
+        
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import com.github.pagehelper.PageInfo;
+
+#if(${restControllerStyle})
+#else
+import org.springframework.stereotype.Controller;
+#end
+#if(${superControllerClassPackage})
+import ${superControllerClassPackage};
+#end
+
+/**
+ * <p>
+ * $!{table.comment} 前端控制器
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+#if(${restControllerStyle})
+@RestController
+#else
+@Controller
+#end
+@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}s#end#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}s#else${table.entityPath}s#end")
+#if(${superControllerClass})
+public class ${table.controllerName} extends ${superControllerClass} {
+#else
+public class ${table.controllerName} {
+#end
+    @Autowired
+    private ${table.serviceName} ${serviceVariableName};
+
+    /*
+      #foreach($field in ${table.fields})
+      
+        #if("$!field.comment" != "") ${field.comment} #end ${field.propertyName} #if(${field.propertyType.equals("Boolean")}) boolean #else ${field.propertyType} #end
+        
+       #end
+      
+     */
+    
+    
+    @GetMapping("get/{id}")
+    public ResponseEntity<${entity}Entity> get(@PathVariable ${primaryKeyTypeString} id) {
+        return new ResponseEntity<${entity}Entity>().ok().setResponseContent(${serviceVariableName}.selectById(id));
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<PageInfo<${entity}Entity>> list(CommonParam commonParam) {
+        return new ResponseEntity<PageInfo<${entity}Entity>>().ok().setResponseContent(${serviceVariableName}.listPage(commonParam));
+    }
+
+    @PostMapping("save")
+    public ResponseEntity<Object> save(${entity}Entity ${entityVariableName}) {
+        try {
+	        if (!${serviceVariableName}.insert(${entityVariableName})){
+	            return new ResponseEntity<Object>().badRequest("保存失败");    
+	        }
+            return new ResponseEntity<Object>().ok("保存成功");
+        } catch (Exception e) {
+            LogManager.getLogger().error(e);
+            return new ResponseEntity<Object>().badRequest("保存失败");  
+        }
+    }
+
+    @PostMapping("update/{id}")
+    public ResponseEntity<Object> update(@PathVariable ${primaryKeyTypeString} id,
+                                              ${entity}Entity ${entityVariableName}){
+        try {
+	        if (!${serviceVariableName}.updateById(${entityVariableName}.setId(id))){
+	            return new ResponseEntity<Object>().badRequest("更新失败");    
+	        }
+	        return new ResponseEntity<Object>().ok("更新成功");
+        } catch (Exception e) {
+            LogManager.getLogger().error(e);
+            return new ResponseEntity<Object>().badRequest("更新失败");  
+        }
+    }
+
+    @PostMapping("del/{id}")
+    public ResponseEntity<Object> del(@PathVariable ${primaryKeyTypeString} id){
+        try {
+	        if (!${serviceVariableName}.deleteById(id) ){
+	            return new ResponseEntity<Object>().badRequest("删除失败");    
+	        }
+	        return new ResponseEntity<Object>().ok("删除成功");
+        } catch (Exception e) {
+            LogManager.getLogger().error(e);
+            return new ResponseEntity<Object>().badRequest("删除失败");  
+        }
+    }
+
+    
+    
+}
