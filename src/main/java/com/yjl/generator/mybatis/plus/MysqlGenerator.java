@@ -69,7 +69,7 @@ public class MysqlGenerator {
                             }
                         }).setDriverName("com.mysql.jdbc.Driver").setUsername("amily") // TODO
                         .setPassword("amily") // TODO
-                        .setUrl("jdbc:mysql://101.200.173.33:3306/crm_boss?characterEncoding=utf8") // TODO
+                        .setUrl("jdbc:mysql://101.200.173.33:3306/msa_boss?characterEncoding=utf8") // TODO
         ).setStrategy(
                 // 策略配置
                 new StrategyConfig()
