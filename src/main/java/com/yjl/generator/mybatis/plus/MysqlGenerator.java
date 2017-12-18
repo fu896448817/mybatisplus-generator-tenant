@@ -69,7 +69,7 @@ public class MysqlGenerator {
                             }
                         }).setDriverName("com.mysql.jdbc.Driver").setUsername("amily") // TODO
                         .setPassword("amily") // TODO
-                        .setUrl("jdbc:mysql://101.200.173.33:3306/crm_demo?characterEncoding=utf8") // TODO
+                        .setUrl("jdbc:mysql://101.200.173.33:3306/crm_boss?characterEncoding=utf8") // TODO
         ).setStrategy(
                 // 策略配置
                 new StrategyConfig()
@@ -108,7 +108,7 @@ public class MysqlGenerator {
                         // 包配置
                         new PackageConfig()
                                 // .setModuleName( "test" )
-                                .setParent("com.amily.crm")// 自定义包路径 // TODO
+                                .setParent("com.amily.msa")// 自定义包路径 // TODO
                                 .setController("controller")// 这里是控制器包名，默认 web
                                 .setEntity("bean.entity").setMapper("dal.mapper")
                                 .setXml("dal.mapper.xml"))
