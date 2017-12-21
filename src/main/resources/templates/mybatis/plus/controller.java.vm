@@ -37,15 +37,6 @@ public class ${table.controllerName} {
 #end
     @Autowired
     private ${table.serviceName} ${serviceVariableName};
-
-    /*
-      #foreach($field in ${table.fields})
-      
-        #if("$!field.comment" != "") ${field.comment} #end ${field.propertyName} #if(${field.propertyType.equals("Boolean")}) boolean #else ${field.propertyType} #end
-        
-       #end
-      
-     */
     
     
     @GetMapping("get/{id}")

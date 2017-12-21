@@ -108,7 +108,7 @@ public class MysqlGenerator {
                         // 包配置
                         new PackageConfig()
                                 // .setModuleName( "test" )
-                                .setParent("com.amily.msa")// 自定义包路径 // TODO
+                                .setParent("com.amily.msa.boss")// 自定义包路径 // TODO
                                 .setController("controller")// 这里是控制器包名，默认 web
                                 .setEntity("bean.entity").setMapper("dal.mapper")
                                 .setXml("dal.mapper.xml"))
