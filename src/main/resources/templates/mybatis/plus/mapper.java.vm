@@ -16,7 +16,7 @@ public interface ${table.mapperName} extends ${superMapperClass}<${entity}Entity
 	
 	 /**
      * <p>
-     * 根据 ID 查询
+     * 根据tenantCode、 ID 查询
      * </p>
      *
      * @param tenantCode 租户代码
@@ -27,7 +27,7 @@ public interface ${table.mapperName} extends ${superMapperClass}<${entity}Entity
 	
 	/**
      * <p>
-     * 根据 ID 修改
+     * 根据 tenantCode、ID 修改
      * </p>
      *
      * @param entity 实体对象
@@ -37,7 +37,7 @@ public interface ${table.mapperName} extends ${superMapperClass}<${entity}Entity
 	
 	/**
      * <p>
-     * 根据 ID 删除
+     * 根据 tenantCode、ID 删除
      * </p>
      *
      * @param tenantCode 租户代码

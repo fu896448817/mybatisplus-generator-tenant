@@ -37,7 +37,7 @@
 
 #end
 
-
+    <!-- 根据tenantCode、 ID 查询 -->
     <select id="selectByIdAndTenantCode" resultType="${package.Entity}.${entity}Entity">
         select
         <include refid="Base_Column_List"/>
@@ -45,7 +45,7 @@
         where id = #{id} and tenant_code = #{tenantCode}
     </select>
     
-    
+    <!-- 根据tenantCode、 ID 修改 -->
     <update id="updateByIdAndTenantCode">
         update ${table.name}
         <set>
@@ -58,7 +58,7 @@
         where id = #{id} and tenant_code = #{tenantCode}
     </update>
 
-
+    <!-- 根据tenantCode、 ID 删除 -->
     <delete id="deleteByIdAndTenantCode">
         delete from ${table.name}
         where id = #{id} and tenant_code = #{tenantCode}
