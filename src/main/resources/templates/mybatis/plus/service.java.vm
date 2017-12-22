@@ -1,6 +1,7 @@
 package ${package.Service};
 
 import ${package.Entity}.${entity}Entity;
+import ${package.Parent}.bean.param.CommonParam;
 import ${superServiceClassPackage};
 import com.github.pagehelper.PageInfo;
 

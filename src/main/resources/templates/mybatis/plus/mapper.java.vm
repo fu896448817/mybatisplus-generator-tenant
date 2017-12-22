@@ -1,5 +1,6 @@
 package ${package.Mapper};
 
+import org.springframework.data.repository.query.Param;
 import ${package.Entity}.${entity}Entity;
 import ${superMapperClassPackage};
 
