@@ -324,6 +324,7 @@ public class AutoGenerator {
                     StringUtils.camelToHyphen(tableInfo.getEntityPath()));
             ctx.put("serviceVariableName", firstCharToLower(tableInfo.getServiceName()));
             ctx.put("entityVariableName", firstCharToLower(tableInfo.getEntityName()));
+            ctx.put("mapperVariableName", firstCharToLower(tableInfo.getMapperName()));
             ctx.put("primaryKeyTypeString", primaryKeyTypeString);
 
             ctx.put("restControllerStyle", config.getStrategyConfig().isRestControllerStyle());

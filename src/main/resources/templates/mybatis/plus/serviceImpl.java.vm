@@ -26,11 +26,11 @@ import com.github.pagehelper.PageInfo;
 public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}Entity> implements ${table.serviceName} {
 
     @Autowired
-    private ${table.mapperName} ${entityVariableName};
+    private ${table.mapperName} ${mapperVariableName};
 	
     @Override
     public ${entity}Entity selectByIdAndTenantCode (String tenantCode,Long id){
-        return entityVariableName.selectByIdAndTenantCode(tenantCode,id);
+        return ${mapperVariableName}.selectByIdAndTenantCode(tenantCode,id);
     }
 	
     @Override
@@ -43,11 +43,11 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 	
     @Override
     public boolean updateByIdAndTenantCode(${entity}Entity entity){
-        return retBool(entityVariableName.updateByIdAndTenantCode(entity));
+        return retBool(${mapperVariableName}.updateByIdAndTenantCode(entity));
     }
 	
     @Override
     public boolean deleteByIdAndTenantCode(String tenantCode,Long id){
-        return retBool(entityVariableName.deleteByIdAndTenantCode(tenantCode,id));
+        return retBool(${mapperVariableName}.deleteByIdAndTenantCode(tenantCode,id));
     }
 }
