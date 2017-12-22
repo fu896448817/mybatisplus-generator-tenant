@@ -27,7 +27,7 @@ import java.util.*;
 
 public class MysqlGenerator {
 
-    private static String output = System.getenv("USERPROFILE") + "\\Desktop\\mybatis\\"; // TODO
+    private static String output = System.getenv("USERPROFILE") + "\\Desktop\\mybatis\\"; // TODO   代码输出的目录
 
     /**
      * <p>
@@ -62,6 +62,7 @@ public class MysqlGenerator {
                             // 自定义数据库表字段类型转换【可选】
                             @Override
                             public DbColumnType processTypeConvert(String fieldType) {
+                            	//例子:把tinyint转换为boolean类型
                                 if (fieldType.toLowerCase().contains("tinyint")) {
                                     return DbColumnType.BOOLEAN;
                                 }
@@ -108,7 +109,7 @@ public class MysqlGenerator {
                         // 包配置
                         new PackageConfig()
                                 // .setModuleName( "test" )
-                                .setParent("com.amily.msa.boss")// 自定义包路径 // TODO
+                                .setParent("com.amily.msa")// 自定义包路径 // TODO
                                 .setController("controller")// 这里是控制器包名，默认 web
                                 .setEntity("bean.entity").setMapper("dal.mapper")
                                 .setXml("dal.mapper.xml"))

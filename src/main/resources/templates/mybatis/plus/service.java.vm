@@ -13,6 +13,8 @@ import com.github.pagehelper.PageInfo;
  * @since ${date}
  */
 public interface ${table.serviceName} extends ${superServiceClass}<${entity}Entity> {
+	
+    ${entity}Entity selectByIdAndTenantCode(String tenantCode,Long id);
     
     /**
      * 默认分页(PageHelper分页)
@@ -51,9 +53,10 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Enti
      *   </pre>                    
      * @return PageInfo
      */
-    PageInfo<${entity}Entity> listPage(CommonParam commonParam);
+    PageInfo<${entity}Entity> listPage(String tenantCode,CommonParam commonParam);
     
-    
-    
+    boolean updateByIdAndTenantCode(${entity}Entity entity);
+	
+    boolean deleteByIdAndTenantCode(String tenantCode,Long id);
         
 }

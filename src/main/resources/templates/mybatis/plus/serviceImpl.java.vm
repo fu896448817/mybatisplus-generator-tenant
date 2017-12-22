@@ -21,12 +21,27 @@ import com.github.pagehelper.PageInfo;
 @Service
 public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}Entity> implements ${table.serviceName} {
 
-
+    @Autowired
+    private ${table.mapperName} entitymapper;
+	
     @Override
-    public PageInfo<${entity}Entity> listPage(CommonParam commonParam) {
+    public ${entity}Entity selectByIdAndTenantCode (String tenantCode,Long id){
+        return entitymapper.selectByIdAndTenantCode(tenantCode,id);
+    }
+	
+    @Override
+    public PageInfo<${entity}Entity> listPage(String tenantCode,CommonParam commonParam) {
         PageHelper.startPage(commonParam.getOffset(), commonParam.getLimit());
         return new PageInfo<>(super.selectList(null));
     }
-    
-    
+	
+    @Override
+    public boolean updateByIdAndTenantCode(${entity}Entity entity){
+        return retBool(entitymapper.updateByIdAndTenantCode(entity));
+    }
+	
+    @Override
+    public boolean deleteByIdAndTenantCode(String tenantCode,Long id){
+        return retBool(entitymapper.deleteByIdAndTenantCode(tenantCode,id));
+    }
 }

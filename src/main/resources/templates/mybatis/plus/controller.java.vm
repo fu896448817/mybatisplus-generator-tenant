@@ -29,7 +29,7 @@ import ${superControllerClassPackage};
 #else
 @Controller
 #end
-@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}s#end#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}s#else${table.entityPath}s#end")
+@RequestMapping("{tenantCode}/#if(${package.ModuleName})/${package.ModuleName}s#end#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}s#else${table.entityPath}s#end")
 #if(${superControllerClass})
 public class ${table.controllerName} extends ${superControllerClass} {
 #else
@@ -37,21 +37,23 @@ public class ${table.controllerName} {
 #end
     @Autowired
     private ${table.serviceName} ${serviceVariableName};
+
     
     
-    @GetMapping("get/{id}")
-    public ResponseEntity<${entity}Entity> get(@PathVariable ${primaryKeyTypeString} id) {
-        return new ResponseEntity<${entity}Entity>().ok().setResponseContent(${serviceVariableName}.selectById(id));
+    @GetMapping("/get/{id}")
+    public ResponseEntity<${entity}Entity> get(@PathVariable String tenantCode,@PathVariable ${primaryKeyTypeString} id) {
+        return new ResponseEntity<${entity}Entity>().ok().setResponseContent(${serviceVariableName}.selectByIdAndTenantCode(tenantCode,id));
     }
 
     @GetMapping("/list")
-    public ResponseEntity<PageInfo<${entity}Entity>> list(CommonParam commonParam) {
-        return new ResponseEntity<PageInfo<${entity}Entity>>().ok().setResponseContent(${serviceVariableName}.listPage(commonParam));
+    public ResponseEntity<PageInfo<${entity}Entity>> list(@PathVariable String tenantCode,CommonParam commonParam) {
+        return new ResponseEntity<PageInfo<${entity}Entity>>().ok().setResponseContent(${serviceVariableName}.listPage(tenantCode,commonParam));
     }
 
-    @PostMapping("save")
-    public ResponseEntity<Object> save(${entity}Entity ${entityVariableName}) {
+    @PostMapping("/save")
+    public ResponseEntity<Object> save(@PathVariable String tenantCode,${entity}Entity ${entityVariableName}) {
         try {
+            ${entityVariableName}.setTenantCode(tenantCode);
 	        if (!${serviceVariableName}.insert(${entityVariableName})){
 	            return new ResponseEntity<Object>().badRequest("保存失败");    
 	        }
@@ -62,11 +64,13 @@ public class ${table.controllerName} {
         }
     }
 
-    @PostMapping("update/{id}")
-    public ResponseEntity<Object> update(@PathVariable ${primaryKeyTypeString} id,
+    @PostMapping("/update/{id}")
+    public ResponseEntity<Object> update(@PathVariable String tenantCode,@PathVariable ${primaryKeyTypeString} id,
                                               ${entity}Entity ${entityVariableName}){
         try {
-	        if (!${serviceVariableName}.updateById(${entityVariableName}.setId(id))){
+            ${entityVariableName}.setId(id);
+            ${entityVariableName}.setTenantCode(tenantCode);
+	        if (!${serviceVariableName}.updateByIdAndTenantCode(${entityVariableName})){
 	            return new ResponseEntity<Object>().badRequest("更新失败");    
 	        }
 	        return new ResponseEntity<Object>().ok("更新成功");
@@ -76,10 +80,10 @@ public class ${table.controllerName} {
         }
     }
 
-    @PostMapping("del/{id}")
-    public ResponseEntity<Object> del(@PathVariable ${primaryKeyTypeString} id){
+    @PostMapping("/del/{id}")
+    public ResponseEntity<Object> del(@PathVariable String tenantCode,@PathVariable ${primaryKeyTypeString} id){
         try {
-	        if (!${serviceVariableName}.deleteById(id) ){
+	        if (!${serviceVariableName}.deleteByIdAndTenantCode(tenantCode,id) ){
 	            return new ResponseEntity<Object>().badRequest("删除失败");    
 	        }
 	        return new ResponseEntity<Object>().ok("删除成功");
