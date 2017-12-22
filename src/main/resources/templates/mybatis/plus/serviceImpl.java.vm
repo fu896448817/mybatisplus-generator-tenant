@@ -31,8 +31,10 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 	
     @Override
     public PageInfo<${entity}Entity> listPage(String tenantCode,CommonParam commonParam) {
+	    Wrapper<${entity}Entity> wrapper = new EntityWrapper<>();
+        wrapper.where(true, "tenant_code={0}", tenantCode);
         PageHelper.startPage(commonParam.getOffset(), commonParam.getLimit());
-        return new PageInfo<>(super.selectList(null));
+        return new PageInfo<>(super.selectList(wrapper));
     }
 	
     @Override
