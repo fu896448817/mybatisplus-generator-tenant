@@ -19,6 +19,9 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Enti
     
     /**
      * 默认分页(PageHelper分页)
+     *
+     * @param tenantCode 租户代码
+     *
      * @param commonParam
      *   <pre>
      *      <table border="1">
@@ -56,8 +59,21 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Enti
      */
     PageInfo<${entity}Entity> listPage(String tenantCode,CommonParam commonParam);
     
+     /**
+     * 实体数据更新
+     * 
+     * @param entity
+     * @return
+     */
     boolean updateByIdAndTenantCode(${entity}Entity entity);
-	
+    
+    /**
+     * 删除实体
+     * 
+     * @param tenantCode 租户代码
+     * @param id
+     * @return
+     */
     boolean deleteByIdAndTenantCode(String tenantCode,Long id);
         
 }
