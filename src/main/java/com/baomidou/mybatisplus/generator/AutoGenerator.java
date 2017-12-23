@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2011-2020, hubin (jobob@qq.com).
  * <p>
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
  * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
  * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
 package com.baomidou.mybatisplus.generator;
@@ -26,14 +24,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.app.VelocityEngine;
-
 import com.baomidou.mybatisplus.generator.config.ConstVal;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.FileOutConfig;
@@ -105,9 +101,11 @@ public class AutoGenerator {
                 String osName = System.getProperty("os.name");
                 if (osName != null) {
                     if (osName.contains("Mac")) {
-                        Runtime.getRuntime().exec("open " + config.getGlobalConfig().getOutputDir());
+                        Runtime.getRuntime()
+                                .exec("open " + config.getGlobalConfig().getOutputDir());
                     } else if (osName.contains("Windows")) {
-                        Runtime.getRuntime().exec("cmd /c start " + config.getGlobalConfig().getOutputDir());
+                        Runtime.getRuntime()
+                                .exec("cmd /c start " + config.getGlobalConfig().getOutputDir());
                     } else {
                         logger.debug("文件输出目录:" + config.getGlobalConfig().getOutputDir());
                     }
@@ -183,16 +181,18 @@ public class AutoGenerator {
                 for (TableField field : tableInfo.getFields()) {
                     if (field.getPropertyType().equalsIgnoreCase("boolean")) {
                         if (field.getPropertyName().contains("is")) {
-                            field.setPropertyName(config.getStrategyConfig(),
-                                    StringUtils.removePrefixAfterPrefixToLower(field.getPropertyName(), 2));
+                            field.setPropertyName(config.getStrategyConfig(), StringUtils
+                                    .removePrefixAfterPrefixToLower(field.getPropertyName(), 2));
                         }
                     }
                 }
             }
             // RequestMapping 连字符风格 user-info
             if (config.getStrategyConfig().isControllerMappingHyphenStyle()) {
-                ctx.put("controllerMappingHyphenStyle", config.getStrategyConfig().isControllerMappingHyphenStyle());
-                ctx.put("controllerMappingHyphen", StringUtils.camelToHyphen(tableInfo.getEntityPath()));
+                ctx.put("controllerMappingHyphenStyle",
+                        config.getStrategyConfig().isControllerMappingHyphenStyle());
+                ctx.put("controllerMappingHyphen",
+                        StringUtils.camelToHyphen(tableInfo.getEntityPath()));
             }
 
             ctx.put("restControllerStyle", config.getStrategyConfig().isRestControllerStyle());
@@ -209,7 +209,8 @@ public class AutoGenerator {
             ctx.put("entityColumnConstant", config.getStrategyConfig().isEntityColumnConstant());
             ctx.put("entityBuilderModel", config.getStrategyConfig().isEntityBuilderModel());
             ctx.put("entityLombokModel", config.getStrategyConfig().isEntityLombokModel());
-            ctx.put("entityBooleanColumnRemoveIsPrefix", config.getStrategyConfig().isEntityBooleanColumnRemoveIsPrefix());
+            ctx.put("entityBooleanColumnRemoveIsPrefix",
+                    config.getStrategyConfig().isEntityBooleanColumnRemoveIsPrefix());
             ctx.put("superEntityClass", superEntityClass);
             ctx.put("superMapperClassPackage", config.getSuperMapperClass());
             ctx.put("superMapperClass", superMapperClass);
@@ -268,12 +269,30 @@ public class AutoGenerator {
         try {
             TableInfo tableInfo = (TableInfo) context.get("table");
             Map<String, String> pathInfo = config.getPathInfo();
-            String entityFile = String.format((pathInfo.get(ConstVal.ENTITY_PATH) + ConstVal.ENTITY_NAME), entityName);
-            String mapperFile = String.format((pathInfo.get(ConstVal.MAPPER_PATH) + File.separator + tableInfo.getMapperName() + ConstVal.JAVA_SUFFIX), entityName);
-            String xmlFile = String.format((pathInfo.get(ConstVal.XML_PATH) + File.separator + tableInfo.getXmlName() + ConstVal.XML_SUFFIX), entityName);
-            String serviceFile = String.format((pathInfo.get(ConstVal.SERIVCE_PATH) + File.separator + tableInfo.getServiceName() + ConstVal.JAVA_SUFFIX), entityName);
-            String implFile = String.format((pathInfo.get(ConstVal.SERVICEIMPL_PATH) + File.separator + tableInfo.getServiceImplName() + ConstVal.JAVA_SUFFIX), entityName);
-            String controllerFile = String.format((pathInfo.get(ConstVal.CONTROLLER_PATH) + File.separator + tableInfo.getControllerName() + ConstVal.JAVA_SUFFIX), entityName);
+            String entityFile = String.format(
+                    (pathInfo.get(ConstVal.ENTITY_PATH) + ConstVal.ENTITY_NAME), entityName);
+            String mapperFile =
+                    String.format(
+                            (pathInfo.get(ConstVal.MAPPER_PATH) + File.separator
+                                    + tableInfo.getMapperName() + ConstVal.JAVA_SUFFIX),
+                            entityName);
+            String xmlFile = String.format((pathInfo.get(ConstVal.XML_PATH) + File.separator
+                    + tableInfo.getXmlName() + ConstVal.XML_SUFFIX), entityName);
+            String serviceFile =
+                    String.format(
+                            (pathInfo.get(ConstVal.SERIVCE_PATH) + File.separator
+                                    + tableInfo.getServiceName() + ConstVal.JAVA_SUFFIX),
+                            entityName);
+            String implFile =
+                    String.format(
+                            (pathInfo.get(ConstVal.SERVICEIMPL_PATH) + File.separator
+                                    + tableInfo.getServiceImplName() + ConstVal.JAVA_SUFFIX),
+                            entityName);
+            String controllerFile =
+                    String.format(
+                            (pathInfo.get(ConstVal.CONTROLLER_PATH) + File.separator
+                                    + tableInfo.getControllerName() + ConstVal.JAVA_SUFFIX),
+                            entityName);
 
             TemplateConfig template = config.getTemplate();
 
@@ -318,11 +337,12 @@ public class AutoGenerator {
      * 将模板转化成为文件
      * </p>
      *
-     * @param context      内容对象
+     * @param context 内容对象
      * @param templatePath 模板文件
-     * @param outputFile   文件生成的目录
+     * @param outputFile 文件生成的目录
      */
-    private void vmToFile(VelocityContext context, String templatePath, String outputFile) throws IOException {
+    private void vmToFile(VelocityContext context, String templatePath, String outputFile)
+            throws IOException {
         if (StringUtils.isEmpty(templatePath)) {
             return;
         }
@@ -371,7 +391,7 @@ public class AutoGenerator {
     }
 
 
-    // ==================================  相关配置  ==================================
+    // ================================== 相关配置 ==================================
     /**
      * 初始化配置
      */

@@ -27,7 +27,8 @@ import java.util.*;
 
 public class MysqlGenerator {
 
-    private static String output = System.getenv("USERPROFILE") + "\\Desktop\\mybatis\\"; // TODO   代码输出的目录
+    private static String output = System.getenv("USERPROFILE") + "\\Desktop\\mybatis\\"; // TODO
+                                                                                          // 代码输出的目录
 
     /**
      * <p>
@@ -62,7 +63,7 @@ public class MysqlGenerator {
                             // 自定义数据库表字段类型转换【可选】
                             @Override
                             public DbColumnType processTypeConvert(String fieldType) {
-                            	//例子:把tinyint转换为boolean类型
+                                // 例子:把tinyint转换为boolean类型
                                 if (fieldType.toLowerCase().contains("tinyint")) {
                                     return DbColumnType.BOOLEAN;
                                 }

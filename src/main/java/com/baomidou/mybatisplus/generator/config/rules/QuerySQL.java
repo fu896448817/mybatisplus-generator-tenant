@@ -1,16 +1,14 @@
 /**
  * Copyright (c) 2011-2020, hubin (jobob@qq.com).
  * <p>
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
  * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
  * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
 package com.baomidou.mybatisplus.generator.config.rules;
@@ -24,8 +22,8 @@ package com.baomidou.mybatisplus.generator.config.rules;
  * @since 2016-04-25
  */
 public enum QuerySQL {
-    MYSQL("mysql", "show tables", "show table status", "show full fields from %s", "NAME", "COMMENT", "FIELD", "TYPE",
-            "COMMENT", "KEY"),
+    MYSQL("mysql", "show tables", "show table status", "show full fields from %s", "NAME",
+            "COMMENT", "FIELD", "TYPE", "COMMENT", "KEY"),
 
     ORACLE("oracle", "SELECT * FROM USER_TABLES", "SELECT * FROM USER_TAB_COMMENTS",
             "SELECT A.COLUMN_NAME, CASE WHEN A.DATA_TYPE='NUMBER' THEN "
@@ -48,18 +46,20 @@ public enum QuerySQL {
                     + "(" + " SELECT CASE count(1) WHEN 1 then 'PRI' ELSE '' END"
                     + " FROM syscolumns,sysobjects,sysindexes,sysindexkeys,systypes "
                     + " WHERE syscolumns.xusertype = systypes.xusertype AND syscolumns.id = object_id (A.NAME) AND sysobjects.xtype = 'PK'"
-                    + " AND sysobjects.parent_obj = syscolumns.id " + " AND sysindexes.id = syscolumns.id "
+                    + " AND sysobjects.parent_obj = syscolumns.id "
+                    + " AND sysindexes.id = syscolumns.id "
                     + " AND sysobjects.NAME = sysindexes.NAME AND sysindexkeys.id = syscolumns.id "
                     + " AND sysindexkeys.indid = sysindexes.indid "
                     + " AND syscolumns.colid = sysindexkeys.colid AND syscolumns.NAME = B.NAME) as 'KEY',"
-                    + "  b.is_identity isIdentity "
-                    + " FROM sys.TABLES a " + " INNER JOIN sys.COLUMNS b ON b.object_id = a.object_id "
+                    + "  b.is_identity isIdentity " + " FROM sys.TABLES a "
+                    + " INNER JOIN sys.COLUMNS b ON b.object_id = a.object_id "
                     + " LEFT JOIN sys.types ON b.user_type_id = sys.types.user_type_id   "
                     + " LEFT JOIN sys.extended_properties c ON c.major_id = b.object_id AND c.minor_id = b.column_id "
                     + " WHERE a.NAME = '%s' and sys.types.NAME !='sysname' ",
             "TABLE_NAME", "COMMENTS", "COLUMN_NAME", "DATA_TYPE", "COMMENTS", "KEY"),
 
-    POSTGRE_SQL("postgre_sql", "select tablename from pg_tables where schemaname='public' ORDER BY tablename",
+    POSTGRE_SQL("postgre_sql",
+            "select tablename from pg_tables where schemaname='public' ORDER BY tablename",
             "SELECT A.tablename, obj_description(relfilenode, 'pg_class') AS comments FROM pg_tables A, pg_class B WHERE A.schemaname='public' AND A.tablename = B.relname",
             "SELECT DISTINCT A.attname AS name,format_type(A.atttypid,A.atttypmod) AS type,col_description(A.attrelid,A.attnum) AS comment,(CASE C.contype WHEN 'p' THEN 'PRI' ELSE '' END) AS key"
                     + " FROM pg_attribute A INNER JOIN pg_class B ON A.attrelid = B.oid"
@@ -77,9 +77,10 @@ public enum QuerySQL {
     private final String fieldComment;
     private final String fieldKey;
 
-    QuerySQL(final String dbType, final String tablesSql, final String tableCommentsSql, final String tableFieldsSql,
-             final String tableName, final String tableComment, final String fieldName, final String fieldType,
-             final String fieldComment, final String fieldKey) {
+    QuerySQL(final String dbType, final String tablesSql, final String tableCommentsSql,
+            final String tableFieldsSql, final String tableName, final String tableComment,
+            final String fieldName, final String fieldType, final String fieldComment,
+            final String fieldKey) {
         this.dbType = dbType;
         this.tablesSql = tablesSql;
         this.tableCommentsSql = tableCommentsSql;
