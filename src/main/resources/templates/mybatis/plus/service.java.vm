@@ -14,15 +14,6 @@ import com.github.pagehelper.PageInfo;
  * @since ${date}
  */
 public interface ${table.serviceName} extends ${superServiceClass}<${entity}Entity> {
-
-	 /**
-     * 获取实体
-     * 
-     * @param tenantCode 租户代码
-     * @param id
-     * @return
-     */
-    ${entity}Entity selectByIdAndTenantCode(String tenantCode,Long id);
     
     /**
      * 默认分页(PageHelper分页)
@@ -65,6 +56,15 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}Enti
      * @return PageInfo
      */
     PageInfo<${entity}Entity> listPage(String tenantCode,CommonParam commonParam);
+
+	 /**
+     * 获取实体
+     * 
+     * @param tenantCode 租户代码
+     * @param id
+     * @return
+     */
+    ${entity}Entity selectByIdAndTenantCode(String tenantCode,Long id);
     
      /**
      * 实体数据更新
