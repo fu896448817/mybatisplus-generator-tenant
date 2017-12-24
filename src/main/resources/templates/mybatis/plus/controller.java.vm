@@ -3,6 +3,7 @@ package ${package.Controller};
 import org.apache.logging.log4j.LogManager;
 import ${package.Parent}.common.ResponseEntity;
 import ${package.Parent}.bean.param.CommonParam;
+import ${package.Entity}.enums.StatusEnum;
 import ${package.Entity}.${entity}Entity;
 import ${package.Service}.${table.serviceName};
         
@@ -41,17 +42,37 @@ public class ${table.controllerName} {
     private ${table.serviceName} ${serviceVariableName};
 
     
+    /**
+     * 获取分页列表
+     * 
+     * @param tenantCode 租户代码
+     * @param commonParam
+     * @return
+     */
+    @GetMapping("/list")
+    public ResponseEntity<PageInfo<${entity}Entity>> list(@PathVariable String tenantCode,CommonParam commonParam) {
+        return new ResponseEntity<PageInfo<${entity}Entity>>().ok().setResponseContent(${serviceVariableName}.listPage(tenantCode,commonParam));
+    }
     
+    /**
+     * 获取单个对象
+     * 
+     * @param tenantCode 租户代码
+     * @param id
+     * @return
+     */
     @GetMapping("/get/{id}")
     public ResponseEntity<${entity}Entity> get(@PathVariable String tenantCode,@PathVariable ${primaryKeyTypeString} id) {
         return new ResponseEntity<${entity}Entity>().ok().setResponseContent(${serviceVariableName}.selectByIdAndTenantCode(tenantCode,id));
     }
 
-    @GetMapping("/list")
-    public ResponseEntity<PageInfo<${entity}Entity>> list(@PathVariable String tenantCode,CommonParam commonParam) {
-        return new ResponseEntity<PageInfo<${entity}Entity>>().ok().setResponseContent(${serviceVariableName}.listPage(tenantCode,commonParam));
-    }
-
+    /**
+     * 保存对象
+     * 
+     * @param tenantCode 租户代码
+     * @param ${entityVariableName}
+     * @return
+     */
     @PostMapping("/save")
     public ResponseEntity<Object> save(@PathVariable String tenantCode,${entity}Entity ${entityVariableName}) {
         try {
@@ -66,12 +87,19 @@ public class ${table.controllerName} {
         }
     }
 
+    /**
+     * 更新
+     * 
+     * @param tenantCode 租户代码
+     * @param id
+     * @param ${entityVariableName}
+     * @return
+     */
     @PostMapping("/update/{id}")
     public ResponseEntity<Object> update(@PathVariable String tenantCode,@PathVariable ${primaryKeyTypeString} id,
                                               ${entity}Entity ${entityVariableName}){
         try {
-            ${entityVariableName}.setId(id);
-            ${entityVariableName}.setTenantCode(tenantCode);
+            ${entityVariableName}.setId(id).setTenantCode(tenantCode);
 	        if (!${serviceVariableName}.updateByIdAndTenantCode(${entityVariableName})){
 	            return new ResponseEntity<Object>().badRequest("更新失败");    
 	        }
@@ -82,8 +110,64 @@ public class ${table.controllerName} {
         }
     }
 
-    @PostMapping("/del/{id}")
-    public ResponseEntity<Object> del(@PathVariable String tenantCode,@PathVariable ${primaryKeyTypeString} id){
+
+    /**
+     * 更新状态
+     * 
+     * @param tenantCode 租户代码
+     * @param id
+     * @param status 状态:ENABLE-可用，DISABLE-不可用，DELETE-删除
+     * @return
+     */
+    @PostMapping("updateStatus/{id}")
+    public ResponseEntity<Object> updateStatus(@PathVariable String tenantCode,
+            @PathVariable Long id, String status) {
+        try {
+            ${entity}Entity entity = new ${entity}Entity();
+            entity.setId(id).setTenantCode(tenantCode).setStatus(status);
+            if (!${serviceVariableName}.updateByIdAndTenantCode(entity)) {
+                return new ResponseEntity<Object>().badRequest("更新失败");
+            }
+
+            return new ResponseEntity<Object>().ok("更新成功");
+        } catch (Exception e) {
+            LogManager.getLogger().error(e);
+            return new ResponseEntity<Object>().badRequest("更新失败");
+        }
+    }
+    
+    
+    /**
+     * 逻辑删除
+     * 
+     * @param tenantCode 租户代码
+     * @param id
+     * @return
+     */
+    @PostMapping("/logicalDel/{id}")
+    public ResponseEntity<Object> logicalDel(@PathVariable String tenantCode,@PathVariable ${primaryKeyTypeString} id){
+        try {
+            ${entity}Entity entity = new ${entity}Entity();
+            entity.setId(id).setTenantCode(tenantCode).setStatus(StatusEnum.DELETE.getCode());
+            if (!${serviceVariableName}.updateByIdAndTenantCode(entity)) {
+                return new ResponseEntity<Object>().badRequest("删除失败");
+            }
+	        return new ResponseEntity<Object>().ok("删除成功");
+        } catch (Exception e) {
+            LogManager.getLogger().error(e);
+            return new ResponseEntity<Object>().badRequest("删除失败");  
+        }
+    }
+
+    /**
+     * 物理删除
+     * 
+     * @param tenantCode 租户代码
+     * @param id
+     * @return
+     */
+    @PostMapping("/physicalDel/{id}")
+    public ResponseEntity<Object> physicalDel(@PathVariable String tenantCode,@PathVariable ${primaryKeyTypeString} id){
         try {
 	        if (!${serviceVariableName}.deleteByIdAndTenantCode(tenantCode,id) ){
 	            return new ResponseEntity<Object>().badRequest("删除失败");    
