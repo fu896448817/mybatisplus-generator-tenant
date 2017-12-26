@@ -3,6 +3,7 @@ package ${package.ServiceImpl};
 import org.springframework.beans.factory.annotation.Autowired;
 import ${package.Entity}.${entity}Entity;
 import ${package.Parent}.bean.param.CommonParam;
+import ${package.Entity}.enums.StatusEnum;
 import ${package.Mapper}.${table.mapperName};
 import ${package.Service}.${table.serviceName};
 import ${superServiceImplClassPackage};
@@ -31,6 +32,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     @Override
     public PageInfo<${entity}Entity> listPage(String tenantCode,CommonParam commonParam) {
 	    Wrapper<${entity}Entity> wrapper = new EntityWrapper<>();
+        wrapper.where(true, "status != {0}", StatusEnum.DELETE.getCode());
         wrapper.where(true, "tenant_code={0}", tenantCode);
         PageHelper.startPage(commonParam.getOffset(), commonParam.getLimit());
         return new PageInfo<>(super.selectList(wrapper));

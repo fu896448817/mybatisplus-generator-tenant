@@ -42,7 +42,7 @@
         select
         <include refid="Base_Column_List"/>
         from ${table.name}
-        where id = #{id} and tenant_code = #{tenantCode}
+        where id = #{id} and tenant_code = #{tenantCode} and `status` in ('ENABLE','MOD_APPROVE')
     </select>
     
     <!-- 根据tenantCode、 ID 修改 -->
