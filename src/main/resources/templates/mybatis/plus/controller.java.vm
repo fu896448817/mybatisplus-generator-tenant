@@ -123,9 +123,9 @@ public class ${table.controllerName} {
     public ResponseEntity<Object> updateStatus(@PathVariable(value = "tenantCode")  String tenantCode,
             @PathVariable(value = "id") Long id, String status) {
         try {
-            ${entity}Entity entity = new ${entity}Entity();
-            entity.setId(id).setTenantCode(tenantCode).setStatus(status);
-            if (!${serviceVariableName}.updateByIdAndTenantCode(entity)) {
+            ${entity}Entity ${entityVariableName} = new ${entity}Entity();
+            ${entityVariableName}.setId(id).setTenantCode(tenantCode).setStatus(status);
+            if (!${serviceVariableName}.updateByIdAndTenantCode(${entityVariableName})) {
                 return new ResponseEntity<Object>().badRequest("更新失败");
             }
 
@@ -147,9 +147,9 @@ public class ${table.controllerName} {
     @PostMapping("/logicalDel/{id}")
     public ResponseEntity<Object> logicalDel(@PathVariable(value = "tenantCode")  String tenantCode,@PathVariable(value = "id") ${primaryKeyTypeString} id){
         try {
-            ${entity}Entity entity = new ${entity}Entity();
-            entity.setId(id).setTenantCode(tenantCode).setStatus(StatusEnum.DELETE.getCode());
-            if (!${serviceVariableName}.updateByIdAndTenantCode(entity)) {
+            ${entity}Entity ${entityVariableName} = new ${entity}Entity();
+            ${entityVariableName}.setId(id).setTenantCode(tenantCode).setStatus(StatusEnum.DELETE.getCode());
+            if (!${serviceVariableName}.updateByIdAndTenantCode(${entityVariableName})) {
                 return new ResponseEntity<Object>().badRequest("删除失败");
             }
 	        return new ResponseEntity<Object>().ok("删除成功");
