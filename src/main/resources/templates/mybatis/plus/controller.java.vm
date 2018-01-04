@@ -49,8 +49,8 @@ public class ${table.controllerName} {
      * @param commonParam
      * @return
      */
-    @GetMapping("/list")
-    public ResponseEntity<PageInfo<${entity}Entity>> list(@PathVariable(value = "tenantCode")  String tenantCode,CommonParam commonParam) {
+    @GetMapping("/list-page")
+    public ResponseEntity<PageInfo<${entity}Entity>> listPage(@PathVariable(value = "tenantCode")  String tenantCode,CommonParam commonParam) {
         return new ResponseEntity<PageInfo<${entity}Entity>>().ok().setResponseContent(${serviceVariableName}.listPage(tenantCode,commonParam));
     }
     
@@ -122,7 +122,7 @@ public class ${table.controllerName} {
      * @param status 状态:ENABLE-可用，DISABLE-不可用，DELETE-删除
      * @return
      */
-    @PostMapping("updateStatus/{id}")
+    @PostMapping("update-status/{id}")
     public ResponseEntity<Object> updateStatus(@PathVariable(value = "tenantCode")  String tenantCode,
             @PathVariable(value = "id") Long id, String status) {
         try {
@@ -148,8 +148,8 @@ public class ${table.controllerName} {
      * @param id
      * @return
      */
-    @PostMapping("/logicalDel/{id}")
-    public ResponseEntity<Object> logicalDel(@PathVariable(value = "tenantCode")  String tenantCode,@PathVariable(value = "id") ${primaryKeyTypeString} id){
+    @PostMapping("/del/{id}")
+    public ResponseEntity<Object> del(@PathVariable(value = "tenantCode")  String tenantCode,@PathVariable(value = "id") ${primaryKeyTypeString} id){
         try {
             ${entity}Entity ${entityVariableName} = new ${entity}Entity();
             ${entityVariableName}.setId(id).setTenantCode(tenantCode).setStatus(StatusEnum.DELETE.getCode());
@@ -171,7 +171,7 @@ public class ${table.controllerName} {
      * @param id
      * @return
      */
-    @PostMapping("/physicalDel/{id}")
+    @PostMapping("/physical-del/{id}")
     public ResponseEntity<Object> physicalDel(@PathVariable(value = "tenantCode")  String tenantCode,@PathVariable(value = "id")  ${primaryKeyTypeString} id){
         try {
 	        if (!${serviceVariableName}.deleteByIdAndTenantCode(tenantCode,id) ){
