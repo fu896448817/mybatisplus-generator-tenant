@@ -77,8 +77,8 @@ public class ${table.controllerName} {
     public ResponseEntity<Object> save(@PathVariable(value = "tenantCode")  String tenantCode,${entity}Entity ${entityVariableName}) {
         try {
             ${entityVariableName}.setTenantCode(tenantCode);
-            ${entityVariableName}.setCreateUserId(userId); // 创建者
-            ${entityVariableName}.setUpdateUserId(userId); // 最后修改者
+            ${entityVariableName}.setCreateUserId(111L); // 创建者 TODO 测试
+            ${entityVariableName}.setUpdateUserId(111L); // 最后修改者 TODO 测试
 	        if (!${serviceVariableName}.insert(${entityVariableName})){
 	            return new ResponseEntity<Object>().badRequest("保存失败");    
 	        }
@@ -102,7 +102,7 @@ public class ${table.controllerName} {
                                               ${entity}Entity ${entityVariableName}){
         try {
             ${entityVariableName}.setId(id).setTenantCode(tenantCode);
-            ${entityVariableName}.setUpdateUserId(userId); // 最后修改者
+            ${entityVariableName}.setUpdateUserId(111L); // 最后修改者 TODO 测试
 	        if (!${serviceVariableName}.updateByIdAndTenantCode(${entityVariableName})){
 	            return new ResponseEntity<Object>().badRequest("更新失败");    
 	        }
@@ -128,7 +128,7 @@ public class ${table.controllerName} {
         try {
             ${entity}Entity ${entityVariableName} = new ${entity}Entity();
             ${entityVariableName}.setId(id).setTenantCode(tenantCode).setStatus(status);
-            ${entityVariableName}.setUpdateUserId(userId); // 最后修改者
+            ${entityVariableName}.setUpdateUserId(111L); // 最后修改者 TODO 测试
             if (!${serviceVariableName}.updateByIdAndTenantCode(${entityVariableName})) {
                 return new ResponseEntity<Object>().badRequest("更新失败");
             }
@@ -153,7 +153,7 @@ public class ${table.controllerName} {
         try {
             ${entity}Entity ${entityVariableName} = new ${entity}Entity();
             ${entityVariableName}.setId(id).setTenantCode(tenantCode).setStatus(StatusEnum.DELETE.getCode());
-            ${entityVariableName}.setUpdateUserId(userId); // 最后修改者
+            ${entityVariableName}.setUpdateUserId(111L); // 最后修改者 TODO 测试
             if (!${serviceVariableName}.updateByIdAndTenantCode(${entityVariableName})) {
                 return new ResponseEntity<Object>().badRequest("删除失败");
             }
