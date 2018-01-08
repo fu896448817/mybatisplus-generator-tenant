@@ -50,7 +50,7 @@ public class ${table.controllerName} {
      * @return
      */
     @GetMapping("/list-page")
-    public ResponseEntity<PageInfo<${entity}Entity>> listPage(@PathVariable(value = "tenantCode")  String tenantCode,CommonParam commonParam) {
+    public ResponseEntity<PageInfo<${entity}Entity>> listPage(@PathVariable(value = "tenantCode")  String tenantCode,CommonParam commonParam) throws Exception {
         return new ResponseEntity<PageInfo<${entity}Entity>>().ok().setResponseContent(${serviceVariableName}.listPage(tenantCode,commonParam));
     }
     
@@ -62,7 +62,7 @@ public class ${table.controllerName} {
      * @return
      */
     @GetMapping("/get/{id}")
-    public ResponseEntity<${entity}Entity> get(@PathVariable(value = "tenantCode")  String tenantCode,@PathVariable(value = "id") ${primaryKeyTypeString} id) {
+    public ResponseEntity<${entity}Entity> get(@PathVariable(value = "tenantCode")  String tenantCode,@PathVariable(value = "id") ${primaryKeyTypeString} id) throws Exception {
         return new ResponseEntity<${entity}Entity>().ok().setResponseContent(${serviceVariableName}.selectByIdAndTenantCode(tenantCode,id));
     }
 
@@ -74,7 +74,7 @@ public class ${table.controllerName} {
      * @return
      */
     @PostMapping("/save")
-    public ResponseEntity<Object> save(@PathVariable(value = "tenantCode")  String tenantCode,${entity}Entity ${entityVariableName}) {
+    public ResponseEntity<Object> save(@PathVariable(value = "tenantCode")  String tenantCode,${entity}Entity ${entityVariableName}) throws Exception {
 
             ${entityVariableName}.setTenantCode(tenantCode);
             ${entityVariableName}.setCreateUserId(111L); // 创建者 TODO 测试
@@ -95,7 +95,7 @@ public class ${table.controllerName} {
      */
     @PostMapping("/update/{id}")
     public ResponseEntity<Object> update(@PathVariable(value = "tenantCode")  String tenantCode,@PathVariable(value = "id") ${primaryKeyTypeString} id,
-                                              ${entity}Entity ${entityVariableName}){
+                                              ${entity}Entity ${entityVariableName}) throws Exception {
 
             ${entityVariableName}.setId(id).setTenantCode(tenantCode);
             ${entityVariableName}.setUpdateUserId(111L); // 最后修改者 TODO 测试
@@ -117,7 +117,7 @@ public class ${table.controllerName} {
      */
     @PostMapping("update-status/{id}")
     public ResponseEntity<Object> updateStatus(@PathVariable(value = "tenantCode")  String tenantCode,
-            @PathVariable(value = "id") Long id, String status) {
+            @PathVariable(value = "id") Long id, String status) throws Exception {
 
             ${entity}Entity ${entityVariableName} = new ${entity}Entity();
             ${entityVariableName}.setId(id).setTenantCode(tenantCode).setStatus(status);
@@ -139,7 +139,7 @@ public class ${table.controllerName} {
      * @return
      */
     @PostMapping("/del/{id}")
-    public ResponseEntity<Object> del(@PathVariable(value = "tenantCode")  String tenantCode,@PathVariable(value = "id") ${primaryKeyTypeString} id){
+    public ResponseEntity<Object> del(@PathVariable(value = "tenantCode")  String tenantCode,@PathVariable(value = "id") ${primaryKeyTypeString} id) throws Exception {
 
             ${entity}Entity ${entityVariableName} = new ${entity}Entity();
             ${entityVariableName}.setId(id).setTenantCode(tenantCode).setStatus(StatusEnum.DELETE.getCode());
@@ -159,7 +159,7 @@ public class ${table.controllerName} {
      * @return
      */
     @PostMapping("/physical-del/{id}")
-    public ResponseEntity<Object> physicalDel(@PathVariable(value = "tenantCode")  String tenantCode,@PathVariable(value = "id")  ${primaryKeyTypeString} id){
+    public ResponseEntity<Object> physicalDel(@PathVariable(value = "tenantCode")  String tenantCode,@PathVariable(value = "id")  ${primaryKeyTypeString} id) throws Exception {
 
 	        if (!${serviceVariableName}.deleteByIdAndTenantCode(tenantCode,id) ){
 	            return new ResponseEntity<Object>().badRequest("删除失败");    
