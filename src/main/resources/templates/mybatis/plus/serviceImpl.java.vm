@@ -34,7 +34,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 	    Wrapper<${entity}Entity> wrapper = new EntityWrapper<>();
         wrapper.where(true, "status != {0}", StatusEnum.DELETE.getCode());
         wrapper.where(true, "tenant_code={0}", tenantCode);
-        PageHelper.startPage(commonParam.getOffset(), commonParam.getLimit());
+        PageHelper.startPage(commonParam.getPageNum(), commonParam.getPageSize());
         return new PageInfo<>(super.selectList(wrapper));
     }
 	
