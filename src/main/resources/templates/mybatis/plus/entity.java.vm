@@ -89,6 +89,9 @@ public class ${entity}Entity implements Serializable {
 #end
 #end
 #if(${activeRecord})
+    /**
+     * 主键值
+     */
 	@Override
 	protected Serializable pkVal() {
 #if(${keyPropertyName})
