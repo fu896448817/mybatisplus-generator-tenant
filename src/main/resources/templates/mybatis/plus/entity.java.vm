@@ -33,8 +33,6 @@ public class ${entity}Entity extends Model<${entity}Entity> {
 public class ${entity}Entity implements Serializable {
 #end
 
-    private static final long serialVersionUID = 1L;
-
 #foreach($field in ${table.fields})
 #if(${field.keyFlag})
 #set($keyPropertyName=${field.propertyName})
