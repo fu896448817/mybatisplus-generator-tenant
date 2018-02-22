@@ -49,7 +49,7 @@ public class MysqlGenerator {
                         .setEnableCache(false)// XML 二级缓存
                         .setBaseResultMap(true)// XML ResultMap
                         .setBaseColumnList(true)// XML columList
-                        .setAuthor("zhaoyc")
+                        .setAuthor("zhaoyc") // TODO
                         // 自定义文件命名，注意 %s 会自动填充表实体属性！
                         // .setMapperName("%sDao")
                         // .setXmlName("%sDao")
@@ -71,7 +71,7 @@ public class MysqlGenerator {
                             }
                         }).setDriverName("com.mysql.jdbc.Driver").setUsername("amily") // TODO
                         .setPassword("amily") // TODO
-                        .setUrl("jdbc:mysql://101.200.173.33:3306/msa_boss?characterEncoding=utf8") // TODO
+                        .setUrl("jdbc:mysql://101.200.173.33:3306/msa_api?characterEncoding=utf8") // TODO
         ).setStrategy(
                 // 策略配置
                 new StrategyConfig()
@@ -110,9 +110,9 @@ public class MysqlGenerator {
                         // 包配置
                         new PackageConfig()
                                 // .setModuleName( "test" )
-                                .setParent("com.amily.msa.boss")// 自定义包路径 // TODO
+                                .setParent("com.amily.msa.api")// 自定义包路径 // TODO
                                 .setController("controller")// 这里是控制器包名，默认 web
-                                .setEntity("bean.entity").setMapper("dal.mapper")
+                                .setEntity("dal.entity").setMapper("dal.mapper")
                                 .setXml("dal.mapper.xml"))
                 .setCfg(
                         // 注入自定义配置，可以在 VM 中使用 cfg.abc 设置的值
