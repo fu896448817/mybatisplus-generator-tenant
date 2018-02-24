@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import ${package.Parent}.ContextUtils;
 import ${package.Parent}.common.ResponseEntity;
 import ${package.Parent}.bean.param.CommonParam;
-import ${package.Entity}.enums.StatusEnum;
+import ${package.Parent}.bean.enums.StatusEnum;
 import ${package.Entity}.${entity}Entity;
 import ${package.Service}.${table.serviceName};
         
