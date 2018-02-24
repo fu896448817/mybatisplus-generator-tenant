@@ -169,10 +169,15 @@ public class ${table.controllerName} {
     @PostMapping("/physical-del/{id}")
     public ResponseEntity<Boolean> physicalDel(@PathVariable(value = "tenantCode")  String tenantCode,@PathVariable(value = "id")  ${primaryKeyTypeString} id) throws Exception {
 
-	        if (!${serviceVariableName}.deleteByIdAndTenantCode(tenantCode,id) ){
-	            return new ResponseEntity<Boolean>().badRequest("删除失败");    
-	        }
-	        return new ResponseEntity<Boolean>().ok("删除成功");
+	    if (!${serviceVariableName}.deleteByIdAndTenantCode(tenantCode,id) ){
+	        return new ResponseEntity<Boolean>().badRequest("删除失败");    
+	    }
+
+        // 记录日志文件
+        LogManager.getLogger().info("物理删除，tenantCode={}，id={}，userid={}", tenantCode, id,
+                contextUtils.getUserId());
+                
+	    return new ResponseEntity<Boolean>().ok("删除成功");
 
     }
 
