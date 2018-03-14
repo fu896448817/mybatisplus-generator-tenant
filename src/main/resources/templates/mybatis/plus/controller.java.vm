@@ -2,7 +2,7 @@ package ${package.Controller};
 
 import org.apache.logging.log4j.LogManager;
 import ${package.Parent}.ContextUtils;
-import ${package.Parent}.common.ResponseEntity;
+import com.amily.msa.basic.common.ResponseEntity;
 import ${package.Parent}.bean.param.CommonParam;
 import ${package.Parent}.bean.enums.StatusEnum;
 import ${package.Entity}.${entity}Entity;
