@@ -13,8 +13,18 @@
  */
 package com.yjl.generator.mybatis.plus;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
-import com.baomidou.mybatisplus.generator.config.*;
+import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
+import com.baomidou.mybatisplus.generator.config.FileOutConfig;
+import com.baomidou.mybatisplus.generator.config.GlobalConfig;
+import com.baomidou.mybatisplus.generator.config.PackageConfig;
+import com.baomidou.mybatisplus.generator.config.StrategyConfig;
+import com.baomidou.mybatisplus.generator.config.TemplateConfig;
 import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.po.TableFill;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
@@ -22,8 +32,6 @@ import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.yjl.generator.mybatis.plus.config.AutoGenerator;
-import com.baomidou.mybatisplus.generator.config.GlobalConfig;
-import java.util.*;
 
 public class MysqlGenerator {
 
@@ -71,7 +79,7 @@ public class MysqlGenerator {
                             }
                         }).setDriverName("com.mysql.jdbc.Driver").setUsername("amily") // TODO
                         .setPassword("amily") // TODO
-                        .setUrl("jdbc:mysql://101.200.173.33:3306/msa_api?characterEncoding=utf8") // TODO
+                        .setUrl("jdbc:mysql://101.200.173.33:3306/engine_auth?characterEncoding=utf8") // TODO
         ).setStrategy(
                 // 策略配置
                 new StrategyConfig()
@@ -110,7 +118,7 @@ public class MysqlGenerator {
                         // 包配置
                         new PackageConfig()
                                 // .setModuleName( "test" )
-                                .setParent("com.amily.msa.api")// 自定义包路径 // TODO
+                                .setParent("com.amily.engine.auth")// 自定义包路径 // TODO
                                 .setController("controller")// 这里是控制器包名，默认 web
                                 .setEntity("dal.entity").setMapper("dal.mapper")
                                 .setXml("dal.mapper.xml"))
