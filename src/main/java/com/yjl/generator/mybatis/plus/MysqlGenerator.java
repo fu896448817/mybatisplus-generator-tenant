@@ -78,8 +78,8 @@ public class MysqlGenerator {
                                 return super.processTypeConvert(fieldType);
                             }
                         }).setDriverName("com.mysql.jdbc.Driver").setUsername("amily") // TODO
-                        .setPassword("amily") // TODO
-                        .setUrl("jdbc:mysql://101.200.173.33:3306/engine_auth?characterEncoding=utf8") // TODO
+                        .setPassword("xxx") // TODO
+                        .setUrl("jdbc:mysql://47.98.52.35:3306/eva_auth?characterEncoding=utf8") // TODO
         ).setStrategy(
                 // 策略配置
                 new StrategyConfig()
